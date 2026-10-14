@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#0f0c0a">
-  <title>D&D Schatzkammer | Beute-Teiler & Live-Gruppenkasse</title>
+  <title>D&D Schatzkammer | Beute-Teiler, Helden-Beutel & Gruppenkasse</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -51,7 +51,7 @@
 
     .container {
       width: 100%;
-      max-width: 1240px;
+      max-width: 1280px;
     }
 
     /* Header & Live-Status */
@@ -124,7 +124,7 @@
       font-size: 0.98rem;
     }
 
-    /* Responsive Dashboard Grid (Smartphone: Tabs | Tablet/Desktop: Side-by-Side) */
+    /* Responsive Dashboard Grid (Smartphone: Tabs | Tablet/Desktop: 2 Columns) */
     .dashboard-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -137,7 +137,7 @@
         padding: 1.75rem 1.5rem 3rem;
       }
       .dashboard-grid {
-        grid-template-columns: 1.12fr 0.88fr;
+        grid-template-columns: 1.08fr 0.92fr;
       }
       .tab-panel {
         display: block !important;
@@ -175,7 +175,7 @@
       padding-bottom: 0.45rem;
     }
 
-    /* Coin Inputs Grid - Mobile 2/3 cols, Tablet 5 cols */
+    /* Coin Inputs Grid */
     .coins-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -232,7 +232,8 @@
 
     /* 16px+ verhindert Auto-Zoom auf iOS Smartphones */
     .coin-input,
-    .text-input {
+    .text-input,
+    .select-input {
       width: 100%;
       background: #090706;
       border: 1px solid #382c21;
@@ -247,7 +248,8 @@
       min-height: 42px;
     }
 
-    .text-input {
+    .text-input,
+    .select-input {
       font-family: 'Crimson Pro', serif;
       text-align: left;
       padding: 0.5rem 0.65rem;
@@ -255,7 +257,8 @@
     }
 
     .coin-input:focus,
-    .text-input:focus {
+    .text-input:focus,
+    .select-input:focus {
       border-color: var(--gold-primary);
     }
 
@@ -299,17 +302,25 @@
       border: 1px solid var(--border-ornate);
       color: var(--gold-light);
       font-family: 'Cinzel', serif;
-      font-size: 0.76rem;
-      padding: 0.38rem 0.65rem;
+      font-size: 0.75rem;
+      padding: 0.36rem 0.65rem;
       border-radius: 20px;
       cursor: pointer;
       min-height: 34px;
+      transition: all 0.15s;
     }
 
     .chip-btn:active,
     .chip-btn:hover {
       border-color: var(--gold-primary);
       background: #33261e;
+    }
+
+    .chip-btn.active-target {
+      background: var(--crimson);
+      border-color: var(--gold-primary);
+      color: var(--gold-light);
+      box-shadow: 0 0 8px rgba(212, 175, 55, 0.25);
     }
 
     .gem-list {
@@ -352,7 +363,7 @@
       font-size: 0.9rem;
       display: flex;
       align-items: center;
-      gap: 0.55rem;
+      gap: 0.45rem;
       white-space: nowrap;
     }
 
@@ -365,62 +376,72 @@
       padding: 0.2rem 0.4rem;
     }
 
-    /* Controls & Party Size */
+    /* Character Roster Section */
+    .roster-box {
+      background: var(--bg-input);
+      border: 1px solid var(--border-ornate);
+      border-radius: 6px;
+      padding: 0.85rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .roster-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.65rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .roster-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      color: var(--gold-light);
+    }
+
+    .roster-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      gap: 0.5rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .hero-chip {
+      display: flex;
+      align-items: center;
+      background: #090706;
+      border: 1px solid #382c21;
+      border-radius: 5px;
+      padding: 0.2rem 0.35rem 0.2rem 0.6rem;
+      gap: 0.3rem;
+    }
+
+    .hero-chip:focus-within {
+      border-color: var(--gold-primary);
+    }
+
+    .hero-chip input {
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-family: 'Crimson Pro', serif;
+      font-size: 16px;
+      width: 100%;
+      outline: none;
+      padding: 0.35rem 0;
+    }
+
+    .hero-add-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    /* Controls & Options */
     .controls-row {
       display: flex;
       flex-direction: column;
       gap: 0.85rem;
-    }
-
-    .party-control {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: var(--bg-input);
-      padding: 0.6rem 0.85rem;
-      border: 1px solid var(--border-ornate);
-      border-radius: 6px;
-    }
-
-    .party-label {
-      font-family: 'Cinzel', serif;
-      font-weight: 600;
-      font-size: 0.92rem;
-      color: var(--gold-light);
-    }
-
-    .stepper {
-      display: flex;
-      align-items: center;
-      background: #090706;
-      border: 1px solid var(--border-ornate);
-      border-radius: 5px;
-      overflow: hidden;
-    }
-
-    .stepper button {
-      background: #271f1a;
-      color: var(--gold-primary);
-      border: none;
-      width: 42px;
-      height: 42px;
-      font-family: 'Cinzel', serif;
-      font-size: 1.25rem;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .stepper input {
-      width: 48px;
-      height: 42px;
-      background: transparent;
-      border: none;
-      color: var(--text-main);
-      font-family: 'Cinzel', serif;
-      font-size: 16px;
-      font-weight: 700;
-      text-align: center;
-      outline: none;
     }
 
     .extra-share-box {
@@ -544,18 +565,18 @@
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 0.6rem;
+      gap: 0.55rem;
     }
 
     .payout-item {
       display: flex;
       align-items: center;
-      gap: 0.45rem;
-      background: rgba(15, 12, 10, 0.8);
+      gap: 0.42rem;
+      background: rgba(15, 12, 10, 0.82);
       border: 1px solid var(--border-ornate);
-      padding: 0.4rem 0.75rem;
+      padding: 0.38rem 0.7rem;
       border-radius: 50px;
-      min-width: 96px;
+      min-width: 92px;
       justify-content: center;
     }
 
@@ -564,22 +585,62 @@
     }
 
     .payout-item svg {
-      width: 26px;
-      height: 26px;
+      width: 24px;
+      height: 24px;
       flex-shrink: 0;
     }
 
     .payout-amount {
       font-family: 'Cinzel', serif;
-      font-size: 1.08rem;
+      font-size: 1.04rem;
       font-weight: 700;
       color: var(--text-main);
     }
 
     .payout-unit {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--text-muted);
       font-family: 'Cinzel', serif;
+    }
+
+    /* Named Character Payout Cards in Step 4 */
+    .named-payout-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 0.55rem;
+      margin-top: 0.9rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .named-payout-card {
+      background: rgba(15, 12, 10, 0.75);
+      border: 1px solid #3a2e23;
+      border-radius: 5px;
+      padding: 0.5rem 0.7rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .named-char-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.84rem;
+      color: var(--gold-light);
+      font-weight: 600;
+    }
+
+    .named-char-sub {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .named-char-coins {
+      font-size: 0.84rem;
+      color: var(--gold-primary);
+      text-align: right;
+      font-weight: 600;
     }
 
     .stash-box {
@@ -616,6 +677,95 @@
       border-top: 1px dashed rgba(212, 175, 55, 0.2);
       font-size: 0.9rem;
       color: var(--gold-light);
+    }
+
+    /* Individual Character Pouches (Helden-Beutel) */
+    .pouches-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    .pouch-card {
+      background: linear-gradient(180deg, rgba(24, 19, 16, 0.95) 0%, rgba(15, 12, 10, 0.95) 100%);
+      border: 1px solid var(--border-ornate);
+      border-radius: 7px;
+      padding: 0.85rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .pouch-card.selected-for-tx {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.18);
+    }
+
+    .pouch-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.65rem;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .pouch-hero-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .pouch-hero-total {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--gold-primary);
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 0.18rem 0.6rem;
+      border-radius: 20px;
+    }
+
+    .pouch-coins-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.35rem;
+    }
+
+    .pouch-coin-pill {
+      background: #0c0908;
+      border: 1px solid #2e241b;
+      border-radius: 5px;
+      padding: 0.35rem 0.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+
+    .pouch-coin-pill.zero {
+      opacity: 0.32;
+    }
+
+    .pouch-coin-pill svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .pouch-coin-val {
+      font-family: 'Cinzel', serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .pouch-coin-lbl {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      color: var(--text-muted);
     }
 
     /* Buttons */
@@ -661,29 +811,36 @@
       color: #ffffff;
     }
 
-    /* Gruppenkasse (Treasury) Panel */
+    /* Gruppenkasse (Treasury) Banner */
     .treasury-total-banner {
       background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.22), rgba(18, 14, 12, 0.95));
       border: 1px solid var(--gold-primary);
       border-radius: 8px;
-      padding: 1.1rem;
+      padding: 1rem;
       text-align: center;
-      margin-bottom: 1rem;
+      margin-bottom: 0.9rem;
     }
 
     .treasury-big-gold {
       font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(1.5rem, 4vw, 2.1rem);
+      font-size: clamp(1.4rem, 3.8vw, 1.95rem);
       color: var(--gold-primary);
-      margin: 0.2rem 0;
+      margin: 0.15rem 0;
     }
 
+    /* Transaction Box for both Heroes & Treasury */
     .tx-box {
       background: var(--bg-input);
-      border: 1px solid var(--border-ornate);
+      border: 1px solid var(--gold-dark);
       border-radius: 6px;
-      padding: 0.9rem;
-      margin-top: 1rem;
+      padding: 0.95rem;
+    }
+
+    .tx-target-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.75rem;
     }
 
     .tx-grid {
@@ -704,24 +861,11 @@
       margin-bottom: 0.2rem;
     }
 
-    .tx-meta-row {
-      display: grid;
-      grid-template-columns: 1fr 1.5fr;
-      gap: 0.5rem;
-      margin-bottom: 0.65rem;
-    }
-
-    @media (max-width: 480px) {
-      .tx-meta-row {
-        grid-template-columns: 1fr;
-      }
-    }
-
     .log-list {
       display: flex;
       flex-direction: column;
       gap: 0.45rem;
-      max-height: 260px;
+      max-height: 250px;
       overflow-y: auto;
     }
 
@@ -748,6 +892,7 @@
     .log-time {
       font-size: 0.76rem;
       color: var(--text-muted);
+      white-space: nowrap;
     }
 
     /* Mobile Bottom Navigation Bar */
@@ -886,7 +1031,7 @@
     </defs>
   </svg>
 
-  <div class="container">
+  <div class="container" id="main-container">
     <header>
       <div class="header-top">
         <h1>D&amp;D Schatzkammer</h1>
@@ -895,17 +1040,17 @@
           <span id="sync-status-label">Verbinde...</span>
         </button>
       </div>
-      <p class="subtitle">Beute-Teiler &amp; Echtzeit-Gruppenkasse für Smartphone &amp; Tablet</p>
+      <p class="subtitle">Beute-Teiler, persönliche Helden-Beutel &amp; optionale Gruppenkasse</p>
     </header>
 
-    <div class="dashboard-grid">
+    <div class="dashboard-grid" id="dashboard-grid">
       <!-- LINKE SPALTE / TAB 1: BEUTE-TEILER -->
       <div id="panel-splitter" class="tab-panel">
         <!-- 1. MÜNZEN -->
         <section class="dnd-card">
           <div class="section-title">
             <span>1. Gefundene Münzen</span>
-            <button class="btn" onclick="resetLoot()" style="min-height: 32px; padding: 0.25rem 0.65rem; font-size: 0.74rem;">Leeren</button>
+            <button class="btn" onclick="resetLoot()" style="min-height: 32px; padding: 0.25rem 0.65rem; font-size: 0.74rem;">Truhe leeren</button>
           </div>
 
           <div class="coins-grid">
@@ -978,33 +1123,48 @@
 
           <label class="gem-toggle-label" style="color: var(--text-main); font-size: 0.92rem;">
             <input type="checkbox" id="liquidate-gems" checked onchange="calculateSplit()">
-            Schätze sofort als Goldwert in die Verteilung einrechnen (sonst als Sachwert in Gruppenkasse)
+            Schätze sofort als Goldwert in die Verteilung einrechnen (sonst als Sachwert einlagern)
           </label>
         </section>
 
-        <!-- 3. GRUPPE & REGELN -->
+        <!-- 3. CHARAKTERNAMEN & VERTEILUNGS-REGELN -->
         <section class="dnd-card">
           <div class="section-title">
-            <span>3. Gruppengröße &amp; Regeln</span>
+            <span>3. Heldengruppe &amp; Regeln</span>
+            <span class="results-header-stats" id="party-count-badge">4 Charaktere</span>
+          </div>
+
+          <div class="roster-box">
+            <div class="roster-header">
+              <span class="roster-title">⚔️ Charaktere (Jeder erhält einen eigenen Gold-Beutel):</span>
+            </div>
+            <div class="roster-grid" id="character-roster-grid"></div>
+            <div class="hero-add-row">
+              <input type="text" id="new-hero-input" class="text-input" placeholder="Neuer Charaktername..." onkeydown="if(event.key==='Enter') addCharacter()">
+              <button type="button" class="btn btn-primary" onclick="addCharacter()">+ Charakter</button>
+            </div>
           </div>
 
           <div class="controls-row">
-            <div class="party-control">
-              <span class="party-label">Abenteurer (Spieler):</span>
-              <div class="stepper">
-                <button type="button" onclick="changeParty(-1)">−</button>
-                <input type="number" inputmode="numeric" id="party-size" min="1" max="50" value="4" oninput="calculateSplit()">
-                <button type="button" onclick="changeParty(1)">+</button>
+            <!-- Hauptschalter: Gruppenkasse verwenden (Optional) -->
+            <div class="extra-share-box active" id="enable-treasury-card">
+              <label>
+                <input type="checkbox" id="enable-treasury" checked onchange="toggleTreasuryModule()">
+                🏦 Gemeinsame Gruppenkasse verwenden (Optional)
+              </label>
+              <div class="extra-share-sub">
+                Wenn aktiv, gibt es neben den Helden-Beuteln eine gemeinsame Kasse für Restmünzen, Schätze &amp; Gruppen-Ausgaben.
               </div>
             </div>
 
+            <!-- Unter-Option: +1 Extra-Anteil für die Gruppenkasse -->
             <div class="extra-share-box" id="extra-share-card">
               <label>
-                <input type="checkbox" id="extra-treasury-share" checked onchange="calculateSplit()">
-                Gruppenkasse zählt als +1 Mitglied
+                <input type="checkbox" id="extra-treasury-share" onchange="toggleExtraShare()">
+                ➕ Gruppenkasse erhält einen vollen Extra-Anteil (+1 Mitglied)
               </label>
               <div class="extra-share-sub" id="extra-share-desc">
-                Ein voller Extra-Anteil fließt direkt in die Gruppenkasse.
+                Optional: Ein voller zusätzlicher Anteil fließt bei jeder Verteilung direkt in die Gruppenkasse.
               </div>
             </div>
 
@@ -1030,73 +1190,87 @@
           </div>
         </section>
 
-        <!-- 4. ERGEBNIS & ÜBERTRAG -->
+        <!-- 4. ERGEBNIS & AUSZAHLUNG AN HELDEN-BEUTEL -->
         <section class="dnd-card">
           <div class="section-title">
             <span>
-              4. Aufteilung
-              <span class="share-badge" id="shares-badge">5 Anteile</span>
+              4. Gerechte Aufteilung
+              <span class="share-badge" id="shares-badge">4 Anteile</span>
             </span>
             <span class="results-header-stats" id="total-gold-display">Gesamt: 0 GM</span>
           </div>
 
           <div class="result-banner">
-            <h3 id="player-payout-heading">Jeder Abenteurer erhält:</h3>
+            <h3 id="player-payout-heading">Jeder Charakter erhält:</h3>
             <div class="payout-coins" id="player-payout"></div>
+            <!-- Namentliche Vorschau mit aktuellem Beutelstand -->
+            <div class="named-payout-grid" id="named-payout-list"></div>
           </div>
 
           <div class="stash-box" id="stash-box-container">
-            <div class="stash-title" id="stash-title-text">Für die Gruppenkasse:</div>
+            <div class="stash-title" id="stash-title-text">Unteilbarer Rest:</div>
             <div class="stash-subtitle" id="stash-subtitle-text"></div>
             <div class="payout-coins" id="party-stash"></div>
             <div class="unliquidated-gems-note" id="unliquidated-gems-box" style="display: none;"></div>
           </div>
 
           <div class="actions-row">
-            <button type="button" class="btn btn-emerald" style="flex: 1.4;" onclick="bookToTreasury()" id="book-btn">
-              📥 Gruppenkassen-Anteil &amp; Rest in Kasse buchen
-            </button>
-            <button type="button" class="btn btn-primary" style="flex: 1;" onclick="copyToClipboard()" id="copy-btn">
-              📋 Discord / VTT Text
+            <button type="button" class="btn btn-emerald" style="width: 100%;" onclick="distributeLootToAll()" id="distribute-btn">
+              📥 Beute jetzt an alle Helden-Beutel (&amp; Gruppenkasse) auszahlen
             </button>
           </div>
         </section>
       </div>
 
-      <!-- RECHTE SPALTE / TAB 2: LIVE-GRUPPENKASSE -->
-      <div id="panel-treasury" class="tab-panel" style="display: none;">
+      <!-- RECHTE SPALTE / TAB 2: HELDEN-BEUTEL & OPTIONALE GRUPPENKASSE -->
+      <div id="panel-wallets" class="tab-panel" style="display: none;">
+        <!-- A. INDIVIDUELLE HELDEN-BEUTEL -->
         <section class="dnd-card">
           <div class="section-title">
+            <span>🎒 Persönliche Helden-Beutel</span>
+            <span class="results-header-stats" id="wallets-room-badge">Raum: hauptkampagne</span>
+          </div>
+
+          <div class="pouches-grid" id="hero-pouches-container"></div>
+        </section>
+
+        <!-- B. OPTIONALE GEMEINSAME GRUPPENKASSE -->
+        <section class="dnd-card" id="treasury-card-section">
+          <div class="section-title">
             <span>🏦 Gemeinsame Gruppenkasse</span>
-            <span class="results-header-stats" id="treasury-room-badge">Raum: hauptkampagne</span>
+            <button type="button" class="chip-btn" onclick="selectTxTarget('treasury')">💸 Für Kasse buchen</button>
           </div>
 
           <div class="treasury-total-banner">
-            <div style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Gesamtvermögen der Gruppe</div>
+            <div style="font-size: 0.82rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Gesamtvermögen der Gruppenkasse</div>
             <div class="treasury-big-gold" id="treasury-total-gp">0,00 GM</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);" id="treasury-sub-breakdown">Münzen: 0 GM | Schätze: 0 GM</div>
+            <div style="font-size: 0.84rem; color: var(--text-muted);" id="treasury-sub-breakdown">Münzen: 0 GM | Schätze: 0 GM</div>
           </div>
 
           <div class="payout-coins" id="treasury-coins-display" style="margin-bottom: 1rem;"></div>
 
-          <!-- Unverkaufte Edelsteine / Kunstgegenstände im Gruppentresor -->
-          <div id="treasury-gems-section" style="margin-bottom: 1rem;">
-            <div class="section-title" style="font-size: 0.92rem; margin-bottom: 0.6rem;">
+          <!-- Gespeicherte Edelsteine / Kunstgegenstände -->
+          <div id="treasury-gems-section">
+            <div class="section-title" style="font-size: 0.92rem; margin-bottom: 0.55rem;">
               <span>💎 Gespeicherte Schätze &amp; Kunstobjekte</span>
             </div>
             <div class="gem-list" id="treasury-gems-list"></div>
           </div>
+        </section>
 
-          <!-- Manuelle Buchung: Einzahlen oder Einkaufen -->
+        <!-- C. EINZAHLEN / EINKAUFEN (FÜR EINZELNEN HELD ODER GRUPPENKASSE) -->
+        <section class="dnd-card" id="tx-section-card">
+          <div class="section-title">
+            <span>💸 Einzahlen &amp; Einkaufen (Beutel-Buchung)</span>
+          </div>
+
           <div class="tx-box">
-            <div style="font-family: 'Cinzel', serif; font-size: 0.92rem; color: var(--gold-light); margin-bottom: 0.55rem;">
-              Manuelle Buchung (Einzahlen / Einkaufen)
+            <div style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.45rem;">
+              Wähle den Beutel für die Buchung:
             </div>
+            <div class="tx-target-chips" id="tx-target-chips"></div>
 
-            <div class="tx-meta-row">
-              <input type="text" id="tx-user" class="text-input" placeholder="Held (z. B. Thorin)">
-              <input type="text" id="tx-reason" class="text-input" placeholder="Grund (z. B. Heiltränke, Taverne)">
-            </div>
+            <input type="text" id="tx-reason" class="text-input" placeholder="Verwendungszweck (z. B. Heiltrank, Rüstung, Taverne, Kopfgeld)" style="margin-bottom: 0.65rem;">
 
             <div class="tx-grid">
               <div class="tx-coin-mini">
@@ -1121,11 +1295,15 @@
               </div>
             </div>
 
-            <div class="actions-row" style="margin-top: 0.75rem;">
-              <button type="button" class="btn btn-emerald" style="flex: 1;" onclick="manualTreasuryTx('deposit')">
+            <div style="font-size: 0.8rem; color: var(--text-muted); font-style: italic; margin-bottom: 0.65rem;">
+              Tipp: Beim Ausgeben wechselt das Tool größere Münzen im Beutel bei Bedarf automatisch klein.
+            </div>
+
+            <div class="actions-row" style="margin-top: 0;">
+              <button type="button" class="btn btn-emerald" style="flex: 1;" onclick="executeWalletTx('deposit')">
                 + Einzahlen
               </button>
-              <button type="button" class="btn btn-primary" style="flex: 1;" onclick="manualTreasuryTx('spend')">
+              <button type="button" class="btn btn-primary" style="flex: 1;" onclick="executeWalletTx('spend')">
                 − Ausgeben / Kaufen
               </button>
             </div>
@@ -1134,7 +1312,7 @@
           <!-- Logbuch -->
           <div style="margin-top: 1.2rem;">
             <div class="section-title" style="font-size: 0.92rem; margin-bottom: 0.6rem;">
-              <span>📜 Kassen-Logbuch (Letzte Buchungen)</span>
+              <span>📜 Gemeinsames Logbuch (Letzte Buchungen)</span>
             </div>
             <div class="log-list" id="treasury-log-list"></div>
           </div>
@@ -1149,7 +1327,7 @@
           </div>
 
           <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
-            Deine Firebase-Datenbank ist fest hinterlegt. Über den <strong>Kampagnen-Code</strong> könnt ihr bei Bedarf auch mehrere separate Gruppenkassen für verschiedene Abenteuer anlegen.
+            Deine Firebase-Datenbank ist fest eingebunden. Alle Charakter-Beutel, Namen und die optionale Gruppenkasse synchronisieren sich automatisch in Echtzeit.
           </p>
 
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.85rem; margin-bottom: 1rem;">
@@ -1182,14 +1360,14 @@
   </div>
 
   <!-- Smartphone Bottom Navigation -->
-  <nav class="mobile-bottom-nav">
+  <nav class="mobile-bottom-nav" id="mobile-bottom-nav">
     <button type="button" class="nav-btn active" id="nav-splitter" onclick="switchMobileTab('splitter')">
       <span class="nav-icon">🪙</span>
       <span>Beute-Teiler</span>
     </button>
-    <button type="button" class="nav-btn" id="nav-treasury" onclick="switchMobileTab('treasury')">
-      <span class="nav-icon">🏦</span>
-      <span>Gruppenkasse</span>
+    <button type="button" class="nav-btn" id="nav-wallets" onclick="switchMobileTab('wallets')">
+      <span class="nav-icon">🎒</span>
+      <span id="nav-wallets-label">Helden &amp; Kasse</span>
     </button>
     <button type="button" class="nav-btn" id="nav-sync" onclick="switchMobileTab('sync')">
       <span class="nav-icon">🔄</span>
@@ -1201,20 +1379,26 @@
     import { initializeApp, deleteApp, getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
     import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
-    // =========================================================================
-    // Fest hinterlegte Firebase Realtime Database URL für dein Projekt:
-    // =========================================================================
     const DEFAULT_FIREBASE_URL = "https://dnd-geldrechner-default-rtdb.europe-west1.firebasedatabase.app/"; 
     const DEFAULT_ROOM_ID = "hauptkampagne";
 
     let currentMode = 'convert';
+    let selectedTxTarget = 'char_0';
+
     let gemItems = [
       { id: 1, name: 'Blutstein', qty: 2, valGP: 50 }
     ];
     let nextGemId = 2;
 
-    // Gruppenkassen-Status
     let treasuryData = {
+      useTreasury: true,
+      extraTreasuryShare: false,
+      characters: [
+        { id: 'c1', name: 'Held 1', coins: { pp: 0, gp: 0, ep: 0, sp: 0, cp: 0 } },
+        { id: 'c2', name: 'Held 2', coins: { pp: 0, gp: 0, ep: 0, sp: 0, cp: 0 } },
+        { id: 'c3', name: 'Held 3', coins: { pp: 0, gp: 0, ep: 0, sp: 0, cp: 0 } },
+        { id: 'c4', name: 'Held 4', coins: { pp: 0, gp: 0, ep: 0, sp: 0, cp: 0 } }
+      ],
       coins: { pp: 0, gp: 0, ep: 0, sp: 0, cp: 0 },
       gems: [],
       logs: []
@@ -1242,28 +1426,150 @@
       }[m]));
     }
 
-    // Mobile Tab Navigation
+    function normalizeCoinObj(c) {
+      const safe = c || {};
+      return {
+        pp: Math.max(0, parseInt(safe.pp, 10) || 0),
+        gp: Math.max(0, parseInt(safe.gp, 10) || 0),
+        ep: Math.max(0, parseInt(safe.ep, 10) || 0),
+        sp: Math.max(0, parseInt(safe.sp, 10) || 0),
+        cp: Math.max(0, parseInt(safe.cp, 10) || 0)
+      };
+    }
+
+    function getCoinsTotalCP(c) {
+      const safe = normalizeCoinObj(c);
+      return safe.pp * 1000 + safe.gp * 100 + safe.ep * 50 + safe.sp * 10 + safe.cp;
+    }
+
+    function formatGPFromCP(cp) {
+      return (cp / 100).toLocaleString('de-DE', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    function renderCharacterRoster() {
+      const grid = document.getElementById('character-roster-grid');
+      const countBadge = document.getElementById('party-count-badge');
+
+      if (!Array.isArray(treasuryData.characters) || treasuryData.characters.length === 0) {
+        treasuryData.characters = [
+          { id: 'c_' + Date.now(), name: 'Held 1', coins: { pp: 0, gp: 0, ep: 0, sp: 0, cp: 0 } }
+        ];
+      }
+
+      const chars = treasuryData.characters;
+      countBadge.textContent = `${chars.length} ${chars.length === 1 ? 'Charakter' : 'Charaktere'}`;
+
+      grid.innerHTML = '';
+      chars.forEach((ch, idx) => {
+        const chip = document.createElement('div');
+        chip.className = 'hero-chip';
+        chip.innerHTML = `
+          <span style="color: var(--gold-primary); font-size: 0.85rem;">⚔️</span>
+          <input type="text" value="${escapeHtml(ch.name)}" placeholder="Name..." onchange="renameCharacter(${idx}, this.value)">
+          ${chars.length > 1 ? `<button type="button" class="remove-btn" title="Charakter entfernen" onclick="removeCharacter(${idx})">✕</button>` : ''}
+        `;
+        grid.appendChild(chip);
+      });
+    }
+
+    window.addCharacter = function() {
+      const input = document.getElementById('new-hero-input');
+      const name = (input.value || '').trim() || `Held ${treasuryData.characters.length + 1}`;
+      treasuryData.characters.push({
+        id: 'c_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+        name,
+        coins: { pp: 0, gp: 0, ep: 0, sp: 0, cp: 0 }
+      });
+      input.value = '';
+      renderCharacterRoster();
+      calculateSplit();
+      saveTreasuryState();
+    };
+
+    window.renameCharacter = function(index, newName) {
+      if (!treasuryData.characters[index]) return;
+      const clean = (newName || '').trim() || `Held ${index + 1}`;
+      treasuryData.characters[index].name = clean;
+      renderCharacterRoster();
+      calculateSplit();
+      saveTreasuryState();
+    };
+
+    window.removeCharacter = function(index) {
+      if (treasuryData.characters.length <= 1) return;
+      const targetChar = treasuryData.characters[index];
+      const hasCoins = getCoinsTotalCP(targetChar.coins) > 0;
+      if (hasCoins && !confirm(`${targetChar.name} hat noch Münzen im Beutel. Wirklich entfernen?`)) {
+        return;
+      }
+      treasuryData.characters.splice(index, 1);
+      if (selectedTxTarget === 'char_' + index) {
+        selectedTxTarget = 'char_0';
+      }
+      renderCharacterRoster();
+      calculateSplit();
+      saveTreasuryState();
+    };
+
+    window.selectTxTarget = function(targetKey) {
+      selectedTxTarget = targetKey;
+      renderTreasuryUI();
+      const txCard = document.getElementById('tx-section-card');
+      if (txCard) {
+        txCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    };
+
+    window.toggleTreasuryModule = function() {
+      treasuryData.useTreasury = document.getElementById('enable-treasury').checked;
+      if (!treasuryData.useTreasury && selectedTxTarget === 'treasury') {
+        selectedTxTarget = 'char_0';
+      }
+      applyTreasuryVisibility();
+      calculateSplit();
+      saveTreasuryState();
+    };
+
+    window.toggleExtraShare = function() {
+      treasuryData.extraTreasuryShare = document.getElementById('extra-treasury-share').checked;
+      calculateSplit();
+      saveTreasuryState();
+    };
+
+    function applyTreasuryVisibility() {
+      const enabled = treasuryData.useTreasury !== false;
+      document.getElementById('enable-treasury').checked = enabled;
+      document.getElementById('enable-treasury-card').classList.toggle('active', enabled);
+      document.getElementById('extra-treasury-share').checked = Boolean(treasuryData.extraTreasuryShare);
+
+      const extraShareCard = document.getElementById('extra-share-card');
+      const treasuryCardSection = document.getElementById('treasury-card-section');
+      const navWalletsLabel = document.getElementById('nav-wallets-label');
+      const distributeBtn = document.getElementById('distribute-btn');
+
+      extraShareCard.style.display = enabled ? 'block' : 'none';
+      treasuryCardSection.style.display = enabled ? 'block' : 'none';
+      navWalletsLabel.textContent = enabled ? 'Helden & Kasse' : 'Helden-Beutel';
+      distributeBtn.textContent = enabled
+        ? '📥 Beute jetzt an alle Helden-Beutel & Gruppenkasse auszahlen'
+        : '📥 Beute jetzt an alle Helden-Beutel auszahlen';
+    }
+
     window.switchMobileTab = function(tabName) {
       if (window.innerWidth >= 960 && tabName !== 'sync') {
         document.getElementById('panel-sync').scrollIntoView({ behavior: 'smooth' });
         return;
       }
-      ['splitter', 'treasury', 'sync'].forEach(t => {
+      ['splitter', 'wallets', 'sync'].forEach(t => {
         const panel = document.getElementById('panel-' + t);
         const btn = document.getElementById('nav-' + t);
         if (panel) panel.style.display = (t === tabName) ? 'block' : 'none';
         if (btn) btn.classList.toggle('active', t === tabName);
       });
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
-    window.changeParty = function(delta) {
-      const input = document.getElementById('party-size');
-      let next = (parseInt(input.value, 10) || 1) + delta;
-      if (next < 1) next = 1;
-      if (next > 50) next = 50;
-      input.value = next;
-      calculateSplit();
     };
 
     window.setMode = function(mode) {
@@ -1380,6 +1686,16 @@
       });
     }
 
+    function formatCoinList(coinObj) {
+      const parts = [];
+      COIN_META.forEach(c => {
+        if (coinObj[c.key] > 0) {
+          parts.push(`${coinObj[c.key].toLocaleString('de-DE')} ${c.label}`);
+        }
+      });
+      return parts.length > 0 ? parts.join(', ') : '0 KM';
+    }
+
     window.calculateSplit = function() {
       const counts = {
         pp: getInt('in-pp'),
@@ -1389,10 +1705,13 @@
         cp: getInt('in-cp')
       };
 
-      let partySize = parseInt(document.getElementById('party-size').value, 10);
-      if (isNaN(partySize) || partySize < 1) partySize = 1;
+      const chars = (treasuryData.characters && treasuryData.characters.length > 0)
+        ? treasuryData.characters
+        : [{ id: 'c1', name: 'Held 1', coins: { pp: 0, gp: 0, ep: 0, sp: 0, cp: 0 } }];
+      const partySize = chars.length;
 
-      const extraShare = document.getElementById('extra-treasury-share').checked;
+      const useTreasury = treasuryData.useTreasury !== false;
+      const extraShare = useTreasury && document.getElementById('extra-treasury-share').checked;
       const totalShares = partySize + (extraShare ? 1 : 0);
 
       const extraCard = document.getElementById('extra-share-card');
@@ -1401,10 +1720,10 @@
       extraCard.classList.toggle('active', extraShare);
 
       if (extraShare) {
-        extraDesc.textContent = `Aktiv: Beute wird durch ${totalShares} geteilt (${partySize}× Spieler + 1× Gruppenkasse).`;
+        extraDesc.textContent = `Aktiv: Beute wird durch ${totalShares} geteilt (${partySize}× Charakter + 1× Gruppenkasse).`;
         sharesBadge.textContent = `${totalShares} Anteile (${partySize}+1)`;
       } else {
-        extraDesc.textContent = `Optional: Ein voller Extra-Anteil fließt direkt in die Gruppenkasse.`;
+        extraDesc.textContent = `Optional: Ein voller zusätzlicher Anteil fließt bei jeder Verteilung direkt in die Gruppenkasse.`;
         sharesBadge.textContent = `${partySize} ${partySize === 1 ? 'Anteil' : 'Anteile'}`;
       }
 
@@ -1424,10 +1743,7 @@
       const totalOverallCP = coinsCP + gemsCP;
       const distributableCP = coinsCP + (liquidateGems ? gemsCP : 0);
 
-      const totalGPFormatted = (totalOverallCP / 100).toLocaleString('de-DE', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      });
+      const totalGPFormatted = formatGPFromCP(totalOverallCP);
       document.getElementById('total-gold-display').textContent = `Gesamt: ${totalGPFormatted} GM`;
 
       let perPlayer = { pp: 0, gp: 0, ep: 0, sp: 0, cp: 0 };
@@ -1455,16 +1771,19 @@
         perPlayer = convertCPToCoins(shareCP, activeOrder);
         partyStash = convertCPToCoins(stashTotalCP, activeOrder);
 
-        const shareGPText = (shareCP / 100).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        const shareGPText = formatGPFromCP(shareCP);
         document.getElementById('player-payout-heading').textContent =
-          `Jeder Abenteurer erhält (1 Anteil = ${shareGPText} GM):`;
+          `Jeder Charakter erhält (+${shareGPText} GM):`;
 
         if (extraShare) {
           stashTitle.textContent = `Gruppenkasse erhält (1 voller Anteil + Rest):`;
           stashSubtitle.textContent = `1 Gruppen-Anteil (${shareGPText} GM) + ${remCP} KM Rundungsrest`;
-        } else {
+        } else if (useTreasury) {
           stashTitle.textContent = `Übrige Münzen für die Gruppenkasse (Rest):`;
-          stashSubtitle.textContent = remCP > 0 ? `${remCP} KM Rundungsrest` : `Kein Münzrest übrig`;
+          stashSubtitle.textContent = remCP > 0 ? `${remCP} KM Rundungsrest wandern in die Gruppenkasse` : `Kein Münzrest übrig`;
+        } else {
+          stashTitle.textContent = `Unteilbarer Münzrest:`;
+          stashSubtitle.textContent = remCP > 0 ? `${remCP} KM bleiben übrig` : `Geht exakt zwischen allen Charakteren auf`;
         }
       } else {
         const physicalCounts = { ...counts };
@@ -1480,16 +1799,38 @@
           partyStash[c.key] = (extraShare ? singleShare : 0) + rem;
         });
 
-        document.getElementById('player-payout-heading').textContent = `Jeder Abenteurer erhält (Exakte Münzen):`;
-        stashTitle.textContent = extraShare ? `Gruppenkasse erhält (1 Anteil + Rest):` : `Unteilbare Münzen für die Gruppenkasse:`;
+        document.getElementById('player-payout-heading').textContent = `Jeder Charakter erhält (Exakte Münzen):`;
+        stashTitle.textContent = extraShare
+          ? `Gruppenkasse erhält (1 Anteil + Rest):`
+          : (useTreasury ? `Unteilbare Münzen für die Gruppenkasse:` : `Unteilbare Restmünzen:`);
         stashSubtitle.textContent = `Physische Aufteilung ohne Geldwechsler`;
       }
+
+      const namedList = document.getElementById('named-payout-list');
+      namedList.innerHTML = '';
+      const coinText = formatCoinList(perPlayer);
+      const payoutCP = getCoinsTotalCP(perPlayer);
+
+      chars.forEach(ch => {
+        const currentCP = getCoinsTotalCP(ch.coins);
+        const nextCP = currentCP + payoutCP;
+        const card = document.createElement('div');
+        card.className = 'named-payout-card';
+        card.innerHTML = `
+          <div>
+            <div class="named-char-title">⚔️ ${escapeHtml(ch.name)}</div>
+            <div class="named-char-sub">Beutel: ${formatGPFromCP(currentCP)} GM ➔ <strong>${formatGPFromCP(nextCP)} GM</strong></div>
+          </div>
+          <div class="named-char-coins">+ ${coinText}</div>
+        `;
+        namedList.appendChild(card);
+      });
 
       const unliqBox = document.getElementById('unliquidated-gems-box');
       if (!liquidateGems && gemItems.length > 0) {
         unliqBox.style.display = 'block';
         const itemSummary = gemItems.map(i => `${i.qty}× ${escapeHtml(i.name)} (${(i.qty * i.valGP).toLocaleString('de-DE')} GM)`).join(', ');
-        unliqBox.innerHTML = `💎 <strong>Unverkaufte Schätze für die Gruppenkasse (${gemsGP.toLocaleString('de-DE')} GM):</strong><br>${itemSummary}`;
+        unliqBox.innerHTML = `💎 <strong>Unverkaufte Schätze (${gemsGP.toLocaleString('de-DE')} GM):</strong><br>${itemSummary}`;
       } else {
         unliqBox.style.display = 'none';
       }
@@ -1509,43 +1850,71 @@
       };
     };
 
-    function formatCoinList(coinObj) {
-      const parts = [];
-      COIN_META.forEach(c => {
-        if (coinObj[c.key] > 0) {
-          parts.push(`${coinObj[c.key].toLocaleString('de-DE')} ${c.label}`);
-        }
-      });
-      return parts.length > 0 ? parts.join(', ') : '0 KM';
-    }
-
-    window.copyToClipboard = function() {
+    window.distributeLootToAll = function() {
       if (!window.lastResult) return;
-      const { perPlayer, partyStash, partySize, extraShare, totalShares, totalGPFormatted, liquidateGems } = window.lastResult;
+      const { perPlayer, partyStash, liquidateGems } = window.lastResult;
 
-      const shareInfo = extraShare ? `${partySize} Helden + 1 Gruppenkasse = ${totalShares} Anteile` : `${partySize} Helden`;
-      const lines = [
-        `🪙 **D&D Beute-Aufteilung** (Gesamt: ${totalGPFormatted} GM | ${shareInfo})`,
-        `• **Pro Charakter:** ${formatCoinList(perPlayer)}`,
-        `• **Gruppenkasse (${extraShare ? '1 Anteil + Rest' : 'Rest'}):** ${formatCoinList(partyStash)}`
-      ];
+      const playerCP = getCoinsTotalCP(perPlayer);
+      const stashCP = getCoinsTotalCP(partyStash);
+      const hasUnliqGems = !liquidateGems && gemItems.length > 0;
 
-      if (gemItems.length > 0) {
-        const gemStr = gemItems.map(i => `${i.qty}× ${i.name} (${i.qty * i.valGP} GM)`).join(', ');
-        lines.push(`• **Schätze (${liquidateGems ? 'in Gold verrechnet' : 'in Gruppenkasse gelegt'}):** ${gemStr}`);
+      if (playerCP === 0 && stashCP === 0 && !hasUnliqGems) {
+        alert('Keine verteilbare Beute eingegeben.');
+        return;
       }
 
-      navigator.clipboard.writeText(lines.join('\n')).then(() => {
-        const btn = document.getElementById('copy-btn');
-        const oldText = btn.textContent;
-        btn.textContent = '✓ Kopiert!';
-        setTimeout(() => (btn.textContent = oldText), 2000);
-      });
-    };
+      if (playerCP > 0) {
+        treasuryData.characters.forEach(ch => {
+          ch.coins = normalizeCoinObj(ch.coins);
+          COIN_META.forEach(c => {
+            ch.coins[c.key] += (perPlayer[c.key] || 0);
+          });
+        });
+      }
 
-    // =========================================================================
-    // GRUPPENKASSE & FIREBASE ECHTZEIT-SYNCHRONISATION
-    // =========================================================================
+      const logDetails = [];
+      if (playerCP > 0) {
+        logDetails.push(`Je Held: +${formatCoinList(perPlayer)}`);
+      }
+
+      if (treasuryData.useTreasury !== false) {
+        if (stashCP > 0) {
+          COIN_META.forEach(c => {
+            treasuryData.coins[c.key] += (partyStash[c.key] || 0);
+          });
+          logDetails.push(`Kasse: +${formatCoinList(partyStash)}`);
+        }
+        if (hasUnliqGems) {
+          gemItems.forEach(g => {
+            treasuryData.gems.push({ name: g.name, qty: g.qty, valGP: g.valGP });
+          });
+          logDetails.push(`${gemItems.length}× Schatz-Posten in Kasse`);
+        }
+
+        ['in-pp', 'in-gp', 'in-ep', 'in-sp', 'in-cp'].forEach(id => {
+          document.getElementById(id).value = 0;
+        });
+        gemItems = [];
+      } else {
+        COIN_META.forEach(c => {
+          document.getElementById('in-' + c.key).value = partyStash[c.key] || 0;
+        });
+        if (liquidateGems) {
+          gemItems = [];
+        }
+      }
+
+      addLogEntry('deposit', '🪙 Beute an Gruppe ausgezahlt', logDetails.join(' | '));
+      renderGemList();
+      calculateSplit();
+      saveTreasuryState();
+
+      const btn = document.getElementById('distribute-btn');
+      btn.textContent = '✓ Beute an alle Helden verteilt!';
+      setTimeout(() => {
+        applyTreasuryVisibility();
+      }, 2200);
+    };
 
     function getActiveConfig() {
       const params = new URLSearchParams(window.location.search);
@@ -1562,15 +1931,34 @@
 
     function normalizeTreasury(raw) {
       const safe = raw || {};
-      const coins = safe.coins || {};
+
+      let chars = [];
+      if (Array.isArray(safe.characters) && safe.characters.length > 0) {
+        chars = safe.characters.map((ch, i) => ({
+          id: ch.id || ('c_' + i),
+          name: (ch.name || '').trim() || `Held ${i + 1}`,
+          coins: normalizeCoinObj(ch.coins)
+        }));
+      } else if (Array.isArray(safe.partyMembers) && safe.partyMembers.length > 0) {
+        chars = safe.partyMembers.map((name, i) => ({
+          id: 'c_' + i,
+          name: String(name).trim() || `Held ${i + 1}`,
+          coins: { pp: 0, gp: 0, ep: 0, sp: 0, cp: 0 }
+        }));
+      } else {
+        chars = [
+          { id: 'c1', name: 'Held 1', coins: { pp: 0, gp: 0, ep: 0, sp: 0, cp: 0 } },
+          { id: 'c2', name: 'Held 2', coins: { pp: 0, gp: 0, ep: 0, sp: 0, cp: 0 } },
+          { id: 'c3', name: 'Held 3', coins: { pp: 0, gp: 0, ep: 0, sp: 0, cp: 0 } },
+          { id: 'c4', name: 'Held 4', coins: { pp: 0, gp: 0, ep: 0, sp: 0, cp: 0 } }
+        ];
+      }
+
       return {
-        coins: {
-          pp: parseInt(coins.pp, 10) || 0,
-          gp: parseInt(coins.gp, 10) || 0,
-          ep: parseInt(coins.ep, 10) || 0,
-          sp: parseInt(coins.sp, 10) || 0,
-          cp: parseInt(coins.cp, 10) || 0
-        },
+        useTreasury: safe.useTreasury !== undefined ? Boolean(safe.useTreasury) : true,
+        extraTreasuryShare: Boolean(safe.extraTreasuryShare),
+        characters: chars,
+        coins: normalizeCoinObj(safe.coins),
         gems: Array.isArray(safe.gems) ? safe.gems : [],
         logs: Array.isArray(safe.logs) ? safe.logs : []
       };
@@ -1586,8 +1974,73 @@
     }
 
     function renderTreasuryUI() {
+      const pouchesContainer = document.getElementById('hero-pouches-container');
+      const targetChipsContainer = document.getElementById('tx-target-chips');
+      pouchesContainer.innerHTML = '';
+      targetChipsContainer.innerHTML = '';
+
+      const chars = treasuryData.characters || [];
+      if (selectedTxTarget.startsWith('char_')) {
+        const idx = parseInt(selectedTxTarget.replace('char_', ''), 10);
+        if (isNaN(idx) || idx >= chars.length) {
+          selectedTxTarget = 'char_0';
+        }
+      }
+
+      chars.forEach((ch, idx) => {
+        const targetKey = 'char_' + idx;
+        const isSelected = (selectedTxTarget === targetKey);
+        const totalCP = getCoinsTotalCP(ch.coins);
+
+        const card = document.createElement('div');
+        card.className = 'pouch-card' + (isSelected ? ' selected-for-tx' : '');
+
+        const coinsHtml = COIN_META.map(cm => {
+          const val = (ch.coins && ch.coins[cm.key]) ? ch.coins[cm.key] : 0;
+          return `
+            <div class="pouch-coin-pill ${val === 0 ? 'zero' : ''}">
+              <svg><use href="${cm.icon}"></use></svg>
+              <span class="pouch-coin-val">${val.toLocaleString('de-DE')}</span>
+              <span class="pouch-coin-lbl">${cm.label}</span>
+            </div>
+          `;
+        }).join('');
+
+        card.innerHTML = `
+          <div class="pouch-card-header">
+            <div class="pouch-hero-name">
+              <span>⚔️ ${escapeHtml(ch.name)}</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.45rem;">
+              <span class="pouch-hero-total">${formatGPFromCP(totalCP)} GM</span>
+              <button type="button" class="chip-btn ${isSelected ? 'active-target' : ''}" onclick="selectTxTarget('${targetKey}')">
+                💸 Buchen
+              </button>
+            </div>
+          </div>
+          <div class="pouch-coins-row">${coinsHtml}</div>
+        `;
+        pouchesContainer.appendChild(card);
+
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'chip-btn' + (isSelected ? ' active-target' : '');
+        chip.textContent = `⚔️ ${ch.name}`;
+        chip.onclick = () => selectTxTarget(targetKey);
+        targetChipsContainer.appendChild(chip);
+      });
+
+      if (treasuryData.useTreasury !== false) {
+        const tChip = document.createElement('button');
+        tChip.type = 'button';
+        tChip.className = 'chip-btn' + (selectedTxTarget === 'treasury' ? ' active-target' : '');
+        tChip.textContent = `🏦 Gruppenkasse`;
+        tChip.onclick = () => selectTxTarget('treasury');
+        targetChipsContainer.appendChild(tChip);
+      }
+
       const c = treasuryData.coins;
-      const coinsCP = c.pp * 1000 + c.gp * 100 + c.ep * 50 + c.sp * 10 + c.cp;
+      const coinsCP = getCoinsTotalCP(c);
       const gemsGP = treasuryData.gems.reduce((s, g) => s + (g.qty * g.valGP), 0);
       const totalGP = (coinsCP / 100) + gemsGP;
 
@@ -1595,11 +2048,10 @@
         totalGP.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' GM';
 
       document.getElementById('treasury-sub-breakdown').textContent =
-        `Münzen: ${(coinsCP / 100).toLocaleString('de-DE', { minimumFractionDigits: 2 })} GM | Sachwerte/Schätze: ${gemsGP.toLocaleString('de-DE')} GM`;
+        `Münzen: ${formatGPFromCP(coinsCP)} GM | Sachwerte/Schätze: ${gemsGP.toLocaleString('de-DE')} GM`;
 
       renderCoins('treasury-coins-display', c);
 
-      // Gespeicherte Schätze in der Gruppenkasse rendern
       const gemListEl = document.getElementById('treasury-gems-list');
       gemListEl.innerHTML = '';
       if (treasuryData.gems.length === 0) {
@@ -1614,15 +2066,19 @@
               <svg><use href="#icon-gem"></use></svg>
               <span><strong>${g.qty}×</strong> ${escapeHtml(g.name)} (${totalVal.toLocaleString('de-DE')} GM)</span>
             </div>
-            <button type="button" class="chip-btn" onclick="sellTreasuryGem(${idx})" title="In Goldmünzen umwandeln">
-              💰 Verkaufen
-            </button>
+            <div style="display: flex; gap: 0.35rem;">
+              <button type="button" class="chip-btn" onclick="sellTreasuryGem(${idx}, 'heroes')" title="Erlös gerecht an alle Helden-Beutel verteilen">
+                ⚔️ An Helden
+              </button>
+              <button type="button" class="chip-btn" onclick="sellTreasuryGem(${idx}, 'treasury')" title="Erlös als Gold in die Gruppenkasse legen">
+                🏦 In Kasse
+              </button>
+            </div>
           `;
           gemListEl.appendChild(div);
         });
       }
 
-      // Logbuch rendern
       const logListEl = document.getElementById('treasury-log-list');
       logListEl.innerHTML = '';
       if (treasuryData.logs.length === 0) {
@@ -1647,73 +2103,48 @@
       const now = new Date();
       const timeStr = now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
       treasuryData.logs.unshift({ type, title, detail, time: timeStr });
-      if (treasuryData.logs.length > 30) {
-        treasuryData.logs = treasuryData.logs.slice(0, 30);
+      if (treasuryData.logs.length > 35) {
+        treasuryData.logs = treasuryData.logs.slice(0, 35);
       }
     }
 
-    // 1-Klick-Übertrag vom Rechner in die Gruppenkasse
-    window.bookToTreasury = function() {
-      if (!window.lastResult) return;
-      const { partyStash, liquidateGems } = window.lastResult;
-
-      const stashCP =
-        partyStash.pp * 1000 +
-        partyStash.gp * 100 +
-        partyStash.ep * 50 +
-        partyStash.sp * 10 +
-        partyStash.cp;
-
-      const hasUnliqGems = !liquidateGems && gemItems.length > 0;
-
-      if (stashCP === 0 && !hasUnliqGems) {
-        alert('Aktuell ist kein Gruppenkassen-Anteil oder Rest zum Buchen vorhanden.');
-        return;
-      }
-
-      COIN_META.forEach(c => {
-        treasuryData.coins[c.key] += (partyStash[c.key] || 0);
-      });
-
-      const bookedParts = [];
-      if (stashCP > 0) bookedParts.push(formatCoinList(partyStash));
-
-      if (hasUnliqGems) {
-        gemItems.forEach(g => {
-          treasuryData.gems.push({ name: g.name, qty: g.qty, valGP: g.valGP });
-        });
-        bookedParts.push(`${gemItems.length}× Schatz-Posten`);
-      }
-
-      addLogEntry('deposit', '+ Beute-Anteil gebucht', bookedParts.join(' + '));
-      saveTreasuryState();
-
-      const btn = document.getElementById('book-btn');
-      const old = btn.textContent;
-      btn.textContent = '✓ In Gruppenkasse gebucht!';
-      setTimeout(() => (btn.textContent = old), 2200);
-    };
-
-    // Schatz aus der Gruppenkasse verkaufen -> in Goldmünzen umwandeln
-    window.sellTreasuryGem = function(index) {
+    window.sellTreasuryGem = function(index, destination) {
       const gem = treasuryData.gems[index];
       if (!gem) return;
       const totalGP = gem.qty * gem.valGP;
-      const wholeGP = Math.floor(totalGP);
-      const remSP = Math.round((totalGP - wholeGP) * 10);
+      const totalCP = Math.round(totalGP * 100);
 
-      treasuryData.coins.gp += wholeGP;
-      treasuryData.coins.sp += remSP;
-      treasuryData.gems.splice(index, 1);
+      if (destination === 'heroes' && treasuryData.characters.length > 0) {
+        const count = treasuryData.characters.length;
+        const shareCP = Math.floor(totalCP / count);
+        const remCP = totalCP % count;
+        const activeOrder = COIN_META.filter(c => c.key !== 'pp' && c.key !== 'ep');
+        const shareCoins = convertCPToCoins(shareCP, activeOrder);
 
-      addLogEntry('deposit', `💰 Schatz verkauft: ${gem.qty}× ${gem.name}`, `+${totalGP.toLocaleString('de-DE')} GM in die Kasse`);
+        treasuryData.characters.forEach(ch => {
+          COIN_META.forEach(cm => {
+            ch.coins[cm.key] += shareCoins[cm.key];
+          });
+        });
+        treasuryData.coins.cp += remCP;
+        treasuryData.gems.splice(index, 1);
+        addLogEntry('deposit', `💎 Schatz verkauft & verteilt: ${gem.qty}× ${gem.name}`, `Je Held +${formatCoinList(shareCoins)}`);
+      } else {
+        const wholeGP = Math.floor(totalGP);
+        const remSP = Math.round((totalGP - wholeGP) * 10);
+        treasuryData.coins.gp += wholeGP;
+        treasuryData.coins.sp += remSP;
+        treasuryData.gems.splice(index, 1);
+        addLogEntry('deposit', `💰 Schatz verkauft (Gruppenkasse): ${gem.qty}× ${gem.name}`, `+${totalGP.toLocaleString('de-DE')} GM in die Kasse`);
+      }
+
+      calculateSplit();
       saveTreasuryState();
     };
 
-    // Manuelle Einzahlung oder Ausgabe (inkl. automatischem Geldwechsel)
-    window.manualTreasuryTx = function(type) {
-      const user = (document.getElementById('tx-user').value || '').trim() || 'Gruppe';
-      const reason = (document.getElementById('tx-reason').value || '').trim() || (type === 'deposit' ? 'Einzahlung' : 'Einkauf');
+    window.executeWalletTx = function(type) {
+      const reasonInput = document.getElementById('tx-reason');
+      const reason = (reasonInput.value || '').trim() || (type === 'deposit' ? 'Einzahlung' : 'Einkauf');
 
       const txCoins = {
         pp: getInt('tx-pp'),
@@ -1723,68 +2154,80 @@
         cp: getInt('tx-cp')
       };
 
-      const txCP =
-        txCoins.pp * 1000 +
-        txCoins.gp * 100 +
-        txCoins.ep * 50 +
-        txCoins.sp * 10 +
-        txCoins.cp;
-
+      const txCP = getCoinsTotalCP(txCoins);
       if (txCP <= 0) return;
+
+      let targetWallet = null;
+      let targetLabel = '';
+
+      if (selectedTxTarget === 'treasury' && treasuryData.useTreasury !== false) {
+        targetWallet = treasuryData.coins;
+        targetLabel = '🏦 Gruppenkasse';
+      } else {
+        const idx = parseInt(selectedTxTarget.replace('char_', ''), 10) || 0;
+        const ch = treasuryData.characters[idx] || treasuryData.characters[0];
+        if (!ch) return;
+        ch.coins = normalizeCoinObj(ch.coins);
+        targetWallet = ch.coins;
+        targetLabel = `⚔️ ${ch.name}`;
+      }
 
       if (type === 'deposit') {
         COIN_META.forEach(c => {
-          treasuryData.coins[c.key] += txCoins[c.key];
+          targetWallet[c.key] += txCoins[c.key];
         });
-        addLogEntry('deposit', `+ ${reason} (${user})`, `+ ${formatCoinList(txCoins)}`);
+        addLogEntry('deposit', `+ ${reason} (${targetLabel})`, `+ ${formatCoinList(txCoins)}`);
       } else {
-        const currentCP =
-          treasuryData.coins.pp * 1000 +
-          treasuryData.coins.gp * 100 +
-          treasuryData.coins.ep * 50 +
-          treasuryData.coins.sp * 10 +
-          treasuryData.coins.cp;
-
+        const currentCP = getCoinsTotalCP(targetWallet);
         if (txCP > currentCP) {
-          alert('Nicht genügend Münzen in der Gruppenkasse!');
+          alert(`Nicht genügend Münzen im Beutel von ${targetLabel}! (Verfügbar: ${formatGPFromCP(currentCP)} GM)`);
           return;
         }
 
-        // Prüfen, ob jede Münzsorte direkt abgezogen werden kann, sonst automatisch wechseln
-        const canSubtractDirectly = COIN_META.every(c => treasuryData.coins[c.key] >= txCoins[c.key]);
+        const canSubtractDirectly = COIN_META.every(c => targetWallet[c.key] >= txCoins[c.key]);
         if (canSubtractDirectly) {
           COIN_META.forEach(c => {
-            treasuryData.coins[c.key] -= txCoins[c.key];
+            targetWallet[c.key] -= txCoins[c.key];
           });
         } else {
-          let newTotalCP = currentCP - txCP;
-          const activeOrder = COIN_META.filter(c => c.key !== 'ep');
-          treasuryData.coins = convertCPToCoins(newTotalCP, activeOrder);
+          const newTotalCP = currentCP - txCP;
+          const keepPP = targetWallet.pp > 0 && newTotalCP >= 1000;
+          const activeOrder = COIN_META.filter(c => {
+            if (c.key === 'ep') return false;
+            if (c.key === 'pp' && !keepPP) return false;
+            return true;
+          });
+          const exchanged = convertCPToCoins(newTotalCP, activeOrder);
+          COIN_META.forEach(c => {
+            targetWallet[c.key] = exchanged[c.key];
+          });
         }
-        addLogEntry('spend', `− ${reason} (${user})`, `− ${formatCoinList(txCoins)}`);
+        addLogEntry('spend', `− ${reason} (${targetLabel})`, `− ${formatCoinList(txCoins)}`);
       }
 
       ['tx-pp', 'tx-gp', 'tx-ep', 'tx-sp', 'tx-cp'].forEach(id => {
         document.getElementById(id).value = 0;
       });
-      document.getElementById('tx-reason').value = '';
+      reasonInput.value = '';
+      calculateSplit();
       saveTreasuryState();
     };
 
-    // Firebase Verbindungs-Logik
     async function initSyncConnection() {
       const { dbUrl, room } = getActiveConfig();
       document.getElementById('cfg-db-url').value = dbUrl;
       document.getElementById('cfg-room-id').value = room;
-      document.getElementById('treasury-room-badge').textContent = `Raum: ${room}`;
+      document.getElementById('wallets-room-badge').textContent = `Raum: ${room}`;
 
-      // Lokalen Zwischenstand laden
       const localSaved = localStorage.getItem('dnd_treasury_local_' + room);
       if (localSaved) {
         try {
           treasuryData = normalizeTreasury(JSON.parse(localSaved));
         } catch (e) {}
       }
+      renderCharacterRoster();
+      applyTreasuryVisibility();
+      calculateSplit();
       renderTreasuryUI();
 
       if (!dbUrl || !dbUrl.startsWith('https://')) {
@@ -1813,6 +2256,9 @@
           if (snapshot.exists()) {
             treasuryData = normalizeTreasury(snapshot.val());
             localStorage.setItem('dnd_treasury_local_' + room, JSON.stringify(treasuryData));
+            renderCharacterRoster();
+            applyTreasuryVisibility();
+            calculateSplit();
             renderTreasuryUI();
           } else {
             set(dbRef, treasuryData);
@@ -1851,8 +2297,9 @@
       });
     };
 
-    // Start
     renderGemList();
+    renderCharacterRoster();
+    applyTreasuryVisibility();
     calculateSplit();
     initSyncConnection();
   </script>
